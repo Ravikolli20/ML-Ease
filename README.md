@@ -45,5 +45,25 @@ ML Ease is a beginner-friendly, no-code, explainable machine learning platform t
 1. **Frontend**: The app runs as a Vite/React application. Ensure your `API_KEY` is set in the environment.
 2. **Backend Reference**: The `backend/` folder contains a production-ready Express server script that can be used to port the logic to a real server.
 
+---
+
+## 🚀 Deploy to Vercel ✅
+Follow these steps to deploy this project to Vercel:
+
+1. Create a Vercel account at https://vercel.com and install the Vercel CLI (optional):
+   - npm i -g vercel
+2. From the project root, run (for an interactive deploy):
+   - vercel
+3. Set required environment variables in the Vercel dashboard for your Project (Project Settings ➜ Environment Variables):
+   - `API_KEY` — your Google GenAI API key
+4. Vercel will run `npm run build` (or `vercel-build` if defined) and serve the built site from the `dist` directory.
+
+Notes:
+- Server API endpoints have been added under `/api` to mirror the Express routes (`/api/analyze`, `/api/train`, `/api/explain`). These are implemented as Vercel Serverless Functions in `api/`.
+- Copy `.env.example` to `.env` locally for development. Do not commit your real secrets.
+
+---
+
+
 ## 📜 License
 Private / Educational Use Only.
