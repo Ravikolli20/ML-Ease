@@ -13,7 +13,7 @@
     "backend": "node backend/server.ts"
   },
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   },
   "dependencies": {
     "@google/genai": "^1.34.0",
