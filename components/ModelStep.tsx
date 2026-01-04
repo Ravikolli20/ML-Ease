@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { BrainCircuit, Sparkles, Wand2, Info, ChevronRight, Play, Sliders, Target } from 'lucide-react';
 import { ProblemType, AlgorithmRecommendation, MLMode } from '../types';
 import { CLASSIFICATION_ALGS, REGRESSION_ALGS } from '../constants';
-import { getAlgorithmRecommendations } from '../services/geminiService';
+import { api } from '../services/api';
 
 interface ModelStepProps {
   stats: any;
@@ -28,8 +28,9 @@ const ModelStep: React.FC<ModelStepProps> = ({ stats, problemType, selectedAlgor
   useEffect(() => {
     if (stats && problemType !== ProblemType.UNDETECTED) {
       setLoadingRecs(true);
-      getAlgorithmRecommendations(stats, problemType)
+      api.getRecommendations(stats, problemType)
         .then(setRecommendations)
+        .catch(err => { console.error('Recommendation error:', err); setRecommendations([]); })
         .finally(() => setLoadingRecs(false));
     }
   }, [stats, problemType]);

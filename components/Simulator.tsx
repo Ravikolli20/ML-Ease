@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Zap, Play, HelpCircle, ArrowRightCircle, AlertCircle } from 'lucide-react';
 import { TrainingResult, ProblemType } from '../types';
-import { simulatePrediction } from '../services/geminiService';
+import { api } from '../services/api';
 
 interface SimulatorProps {
   result: TrainingResult;
@@ -24,9 +24,10 @@ const Simulator: React.FC<SimulatorProps> = ({ result, problemType }) => {
     setError(null);
     setLoading(true);
     try {
-      const res = await simulatePrediction(result.modelName, inputs, problemType);
+      const res = await api.getSimulation(result.modelName, inputs, problemType);
       setPrediction(res);
     } catch (e) {
+      console.error('Simulation error:', e);
       setError("Failed to generate simulation.");
     } finally {
       setLoading(false);
